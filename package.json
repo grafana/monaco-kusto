@@ -48,7 +48,7 @@
     "xregexp": "^3.2.0"
   },
   "dependencies": {
-    "@kusto/language-service": "0.0.19",
+    "@kusto/language-service": "0.0.20",
     "@kusto/language-service-next": "0.0.23"
   },
   "peerDependencies": {
