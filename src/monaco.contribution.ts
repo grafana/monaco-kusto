@@ -8,6 +8,11 @@ import KustoCommandHighlighter from './commandHighlighter';
 import KustoCommandFormatter from './commandFormatter';
 import { extend } from './extendedEditor';
 
+import '@kusto/language-service/bridge.js';
+import '@kusto/language-service/Kusto.JavaScript.Client.js';
+import '@kusto/language-service-next/Kusto.Language.Bridge.js';
+import '@kusto/language-service/newtonsoft.json.js';
+import 'vscode-languageserver-types';
 
 declare var require: <T>(moduleId: [string], callback: (module: T) => void) => void;
 
@@ -70,7 +75,9 @@ monaco.languages.kusto = createAPI();
 // --- Registration to monaco editor ---
 
 function withMode(callback: (module: typeof mode) => void): void {
-	require<typeof mode>(['vs/language/kusto/kustoMode'], callback);
+	require<typeof mode>(['./kustoMode'], callback);
+	// let module = require('./kustoMode');
+	// callback(module);
 }
 
 monaco.languages.onLanguage('kusto', () => {
@@ -181,3 +188,16 @@ function triggerSuggestDialogWhenCompletionItemSelected(editor: monaco.editor.IC
 function isStandaloneCodeEditor(editor: monaco.editor.ICodeEditor): editor is monaco.editor.IStandaloneCodeEditor {
     return (editor as monaco.editor.IStandaloneCodeEditor).addAction !== undefined;
 }
+
+// tslint:disable:max-line-length
+(self as any).MonacoEnvironment = {
+  getWorkerUrl: (moduleId, label) => {
+    switch (label) {
+      case "kusto":
+        return require("blob-url-loader?type=application/javascript!compile-loader?target=worker&emit=false!./kusto.worker");
+      default:
+				// return require("blob-url-loader?type=application/javascript!compile-loader?target=worker&emit=false!monaco-editor-core/esm/vs/editor/editor.worker");
+				return require("blob-url-loader?type=application/javascript!compile-loader?target=worker&emit=false!monaco-editor/esm/vs/editor/editor.worker");
+    }
+  }
+};
