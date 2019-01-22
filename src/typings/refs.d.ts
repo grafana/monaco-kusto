@@ -18,3 +18,15 @@ declare module System.Text.RegularExpressions {
     export interface Match {}
     export interface MatchCollection {}
 }
+
+/**
+* Stubs for Kusto.JavaScript.Client and Kusto.Language.Bridge
+*/
+declare module System {
+    export interface StringComparison {}
+}
+
+declare module System.Collections.Generic {
+    export type IReadOnlyList$1<T> = any;
+    export interface IReadOnlyDictionary$2<TKey, TValue> {}
+}
