@@ -37,6 +37,7 @@ import GlobalState = Kusto.Language.GlobalState;
 
 import { Database, getCslTypeNameFromClrType, getEntityDataTypeFromCslType } from './schema';
 
+let System = (Bridge.global as any).System;
 let List = System.Collections.Generic.List$1;
 
 function assertNever(x: never): never {
