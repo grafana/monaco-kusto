@@ -19,8 +19,12 @@ if (!String.prototype.endsWith) {
 if (typeof (document) == "undefined") {
     // monaco will run the workder from vs/base/worker so the relative path needs to be from there (hence going up 2 dirs)
     // importScripts('../../language/kusto/bridge.js');
-    // importScripts('../../language/kusto/kusto.javascript.client.js');
+    // importScripts('../../language/kusto/Kusto.JavaScript.Client.js');
     // importScripts('../../language/kusto/Kusto.Language.Bridge.js');
+
+    // It's only possible to build web workers as a blob objects in webpack, so importScripts() will not work
+    // since blob:http:// has different domain. In order to solve this, dependencies should be "inlined" into the
+    // blob with require().
     require('@kusto/language-service/bridge');
     require('@kusto/language-service/Kusto.JavaScript.Client');
     require('@kusto/language-service-next/Kusto.Language.Bridge');

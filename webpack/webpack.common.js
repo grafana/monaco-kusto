@@ -8,12 +8,13 @@ module.exports = {
   node: {
     fs: 'empty'
   },
-  // mode: 'production',
-  // devtool: "cheap-module-source-map",
-  mode: 'development',
   entry: {
-    'monaco.contribution': './src/monaco.contribution.ts',
+    // 'monaco.contribution': './src/monaco.contribution.ts',
+    'monaco.contribution': './src/index.ts',
     // 'kusto.worker': './src/kusto.worker.ts',
+    'bridge': '@kusto/language-service/bridge.js',
+    'Kusto.JavaScript.Client': '@kusto/language-service/Kusto.JavaScript.Client.js',
+    'Kusto.Language.Bridge': '@kusto/language-service-next/Kusto.Language.Bridge.js',
   },
   output: {
     filename: '[name].js',
@@ -96,34 +97,14 @@ module.exports = {
     ]
   },
   optimization: {
-    // splitChunks: {
-    //   chunks: 'all',
-    //   cacheGroups: {
-    //     bridge: {
-    //       test: /node_modules\/@kusto\/language-service\/bridge/,
-    //       name: 'bridge',
-    //       chunks: 'all',
-    //     },
-    //     KustoJavaScriptClient: {
-    //       test: /node_modules\/@kusto\/language-service\/Kusto\.JavaScript\.Client/,
-    //       name: 'Kusto.JavaScript.Client',
-    //       chunks: 'all',
-    //     },
-    //     KustoLanguageBridge: {
-    //       test: /node_modules\/@kusto\/language-service-next\/Kusto\.Language\.Bridge/,
-    //       name: 'Kusto.Language.Bridge',
-    //       chunks: 'all',
-    //     },
-    //   }
-    // }
+    usedExports: true,
+    removeAvailableModules: false,
   },
   plugins: [
-    // new BundleAnalyzerPlugin({ analyzerPort: 8889 }),
-    new CleanWebpackPlugin('../release/webpack', { allowExternal: true }),
+    // new CleanWebpackPlugin('../release/webpack', { allowExternal: true }),
     new webpack.IgnorePlugin(/^((fs)|(path)|(os)|(crypto)|(source-map-support))$/, /vs\/language\/typescript\/lib/),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),
-    // new UglifyJSPlugin()
   ],
 };
