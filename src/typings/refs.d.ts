@@ -30,3 +30,5 @@ declare module System.Collections.Generic {
     export type IReadOnlyList$1<T> = any;
     export interface IReadOnlyDictionary$2<TKey, TValue> {}
 }
+
+declare interface Plugin {}

@@ -50,7 +50,7 @@ export class WorkerManager {
 	}
 
 	dispose(): void {
-		clearInterval(this._idleCheckInterval);
+		self.clearInterval(this._idleCheckInterval);
 		this._configChangeListener.dispose();
 		this._stopWorker();
 	}

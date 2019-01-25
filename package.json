@@ -1,5 +1,5 @@
 {
-  "name": "@kusto/monaco-kusto",
+  "name": "@alexanderzobnin/monaco-kusto",
   "version": "0.2.2",
   "description": "CSL, KQL plugin for the Monaco Editor",
   "author": {
@@ -14,24 +14,27 @@
   "homepage": "https://github.com/Azure/monaco-kusto",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Azure/monaco-kusto"
+    "url": "https://github.com/grafana/monaco-kusto"
   },
   "scripts": {
     "compile": "gulp compile",
     "watch": "gulp watch",
-    "prepublish": "gulp release",
+    "prepublish-gulp": "gulp release",
+    "prepublish": "webpack --progress --colors --config webpack/webpack.release.js",
+    "release": "webpack --progress --colors --config webpack/webpack.release.js",
     "test": "jest",
     "dev": "webpack --progress --colors --mode development --config webpack/webpack.dev.js",
     "build": "webpack --progress --colors --config webpack/webpack.prod.js"
   },
-  "main": "./release/min/monaco.contribution.js",
-  "types": "./release/min/monaco.contribution.d.ts",
+  "main": "./release/webpack/monaco.contribution.min.js",
+  "types": "./release/webpack/monaco.contribution.d.ts",
   "devDependencies": {
     "@types/jest": "^21.1.8",
     "@types/lodash": "^4.14.109",
     "@types/node": "^10.12.18",
     "@types/xregexp": "^3.0.29",
     "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
     "event-stream": "3.3.4",
     "gulp": "^3.9.1",
     "gulp-requirejs": "0.1.3",

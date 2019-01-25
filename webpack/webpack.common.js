@@ -49,7 +49,8 @@ module.exports = {
         use: {
           loader: 'ts-loader',
           options: {
-            transpileOnly: true
+            configFile: 'src/tsconfig.json',
+            // transpileOnly: true
           },
         },
       },
@@ -101,7 +102,7 @@ module.exports = {
     removeAvailableModules: false,
   },
   plugins: [
-    // new CleanWebpackPlugin('../release/webpack', { allowExternal: true }),
+    new CleanWebpackPlugin('../release/webpack', { allowExternal: true }),
     new webpack.IgnorePlugin(/^((fs)|(path)|(os)|(crypto)|(source-map-support))$/, /vs\/language\/typescript\/lib/),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,

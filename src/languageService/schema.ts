@@ -1,4 +1,5 @@
 // Definition of schema object in the context of language services. This model is exposed to consumers of this library.
+/// <reference path="../typings/refs.d.ts" />
 
 export interface Column {
     name: string,

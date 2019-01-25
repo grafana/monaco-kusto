@@ -3,6 +3,7 @@
 /out/
 /src/
 /test/
+/webpack/
 /gulpfile.js
 /.npmignore
 .tfignore
