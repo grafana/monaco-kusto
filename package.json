@@ -20,7 +20,7 @@
     "compile": "gulp compile",
     "watch": "gulp watch",
     "prepublish-gulp": "gulp release",
-    "prepublish": "webpack --progress --colors --config webpack/webpack.release.js",
+    "prepublishOnly": "webpack --progress --colors --config webpack/webpack.release.js",
     "release": "webpack --progress --colors --config webpack/webpack.release.js",
     "test": "jest",
     "dev": "webpack --progress --colors --mode development --config webpack/webpack.dev.js",
